@@ -1,4 +1,4 @@
-pn# 多链ETH余额查询服务
+# Walanz Service
 
 这是一个基于Node.js的RESTful API服务，用于查询以太坊钱包地址在多个链上的ETH余额。该服务支持viem/chains中定义的所有链。
 
