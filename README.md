@@ -1,71 +1,52 @@
-# Walanz Service
+# Balance Service API
 
-这是一个基于Node.js的RESTful API服务，用于查询以太坊钱包地址在多个链上的ETH余额。该服务支持viem/chains中定义的所有链。
+ETH 余额查询服务 - 支持多链查询
 
-## 功能特点
+## 技术栈
 
-- 支持查询单个或多个链上的ETH余额
-- 支持所有viem/chains中定义的链
-- 提供余额汇总和详细信息
-- 包含区块浏览器链接
+- NestJS
+- TypeScript
+- Viem (以太坊库)
 
-## API接口
-
-### 1. 获取支持的链列表
-
-```
-GET /api/chains
-```
-
-返回所有支持的链及其信息。
-
-### 2. 查询多链余额
-
-```
-POST /api/balances
-```
-
-请求体：
-```json
-{
-  "address": "0x...",
-  "chains": ["arbitrum", "zksync"] // 可选，不提供则查询所有支持的链
-}
-```
-
-### 3. 查询单链余额
-
-```
-GET /api/balance/:chain/:address
-```
-
-示例：`/api/balance/arbitrum/0x...`
-
-## 使用方法
-
-1. 安装依赖：
-```bash
-npm install
-```
-
-2. 启动服务：
-```bash
-npm start
-```
-
-服务将在 http://localhost:3000 启动
-
-## 示例请求
+## 安装
 
 ```bash
-# 获取支持的链列表
-curl http://localhost:3000/api/chains
-
-# 查询多链余额
-curl -X POST http://localhost:3000/api/balances \
-  -H "Content-Type: application/json" \
-  -d '{"address":"0x123...","chains":["arbitrum","zksync"]}'
-
-# 查询单链余额
-curl http://localhost:3000/api/balance/arbitrum/0x123...
+# 安装依赖
+pnpm install
 ```
+
+## 运行
+
+```bash
+# 开发模式
+pnpm start:dev
+
+# 生产模式
+pnpm build
+pnpm start:prod
+```
+
+## API 文档
+
+启动服务后，访问 http://localhost:3000/api 查看 Swagger API 文档。
+
+## 主要功能
+
+1. 查询支持的链列表
+   - `GET /v1/chains`
+   - 参数：keyword (搜索关键词)、offset (分页)、limit (每页数量)
+
+2. 批量查询钱包地址余额
+   - `POST /v1/addresses/balances`
+   - 请求体: `{ "addresses": ["0x..."], "chains": ["ethereum", "arbitrum"] }`
+
+3. 查询单个链上的地址余额
+   - `GET /v1/chains/:chain/addresses/:address/balance`
+
+## 特性
+
+- 支持多链查询
+- 支持批量钱包地址查询
+- 自动转换 ETH 价格到 USD 和 CNY
+- 缓存 ETH 价格减少 API 调用
+- Swagger API 文档
