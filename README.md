@@ -1,52 +1,83 @@
-# Balance Service API
+<p align="center">
+  <img src="./icons/icon-128.png" width="128" height="128" alt="Walanz Logo">
+</p>
 
-ETH 余额查询服务 - 支持多链查询
+<h1 align="center">Walanz Balance Service</h1>
 
-## 技术栈
+<p align="center">Multi-chain Ethereum Balance Query Service</p>
 
-- NestJS
-- TypeScript
-- Viem (以太坊库)
+<div align="center">
+  <a href="#features">Features</a> •
+  <a href="#tech-stack">Tech Stack</a> •
+  <a href="#development-guide">Development Guide</a> •
+  <a href="#deployment">Deployment</a> •
+  <a href="#api-documentation">API Documentation</a> •
+  <a href="#license">License</a>
+</div>
 
-## 安装
+---
+
+## Features
+
+- ✅ Multi-chain support: Query multiple Ethereum-compatible chains via [viem](https://viem.sh/)
+- ✅ Batch address queries: Query multiple wallet addresses across multiple chains simultaneously
+- ✅ Price conversion: Automatically convert ETH balances to USD and CNY
+- ✅ Serverless deployment: Optimized for Vercel platform
+- ✅ RESTful API: Complete API for querying chains and balances
+- ✅ Swagger documentation: Auto-generated API documentation
+
+## Tech Stack
+
+- **NestJS**: For building scalable backend services
+- **Viem**: Provides multi-chain support and blockchain interactions
+- **TypeScript**: Type-safe codebase
+- **Swagger**: For API documentation
+
+## Development Guide
+
+### Install Dependencies
 
 ```bash
-# 安装依赖
 pnpm install
 ```
 
-## 运行
+### Run Development Environment
 
 ```bash
-# 开发模式
 pnpm start:dev
-
-# 生产模式
-pnpm build
-pnpm start:prod
 ```
 
-## API 文档
+### Build Project
 
-启动服务后，访问 http://localhost:3000/api 查看 Swagger API 文档。
+```bash
+pnpm build
+```
 
-## 主要功能
+### Run Tests
 
-1. 查询支持的链列表
-   - `GET /v1/chains`
-   - 参数：keyword (搜索关键词)、offset (分页)、limit (每页数量)
+```bash
+pnpm test
+```
 
-2. 批量查询钱包地址余额
-   - `POST /v1/addresses/balances`
-   - 请求体: `{ "addresses": ["0x..."], "chains": ["ethereum", "arbitrum"] }`
+## Deployment
 
-3. 查询单个链上的地址余额
-   - `GET /v1/chains/:chain/addresses/:address/balance`
+This project is optimized for the Vercel platform. See `VERCEL_DEPLOYMENT.md` for detailed deployment instructions.
 
-## 特性
+### Basic Deployment
 
-- 支持多链查询
-- 支持批量钱包地址查询
-- 自动转换 ETH 价格到 USD 和 CNY
-- 缓存 ETH 价格减少 API 调用
-- Swagger API 文档
+```bash
+vercel deploy
+```
+
+## API Documentation
+
+API documentation is provided by Swagger, accessible in development mode at: `http://localhost:3000/api`
+
+### Main Endpoints
+
+- **GET /chains**: Get all supported chains
+- **POST /addresses/balances**: Query balances for multiple addresses across multiple chains
+
+## License
+
+[MIT License](LICENSE)
