@@ -2,7 +2,26 @@
   "version": 2,
   "buildCommand": "pnpm run build",
   "outputDirectory": "dist",
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api" }
+  "routes": [
+    { 
+      "src": "/docs/swagger-ui-bundle\\.js", 
+      "dest": "https://cdn.jsdelivr.net/npm/swagger-ui-dist/swagger-ui-bundle.js" 
+    },
+    { 
+      "src": "/docs/swagger-ui-standalone-preset\\.js", 
+      "dest": "https://cdn.jsdelivr.net/npm/swagger-ui-dist/swagger-ui-standalone-preset.js" 
+    },
+    { 
+      "src": "/docs/swagger-ui\\.css", 
+      "dest": "https://cdn.jsdelivr.net/npm/swagger-ui-dist/swagger-ui.css" 
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api",
+      "headers": {
+        "Cache-Control": "no-store, max-age=0",
+        "Access-Control-Allow-Origin": "*"
+      }
+    }
   ]
 }
